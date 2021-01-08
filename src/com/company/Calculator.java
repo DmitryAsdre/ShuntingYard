@@ -35,7 +35,7 @@ public class Calculator {
             }else
                 throw new RuntimeException("unknown token");
         }
-        assert stack.size() != 1 : "stack size is not 1";
+        assert stack.size() == 1 : "stack size is not 1";
         return stack.pop();
     }
 }
