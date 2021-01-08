@@ -1,18 +1,18 @@
 package com.company;
+import java.util.Vector;
+import java.util.Stack;
 
 public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        try{
-            TokenGenerator token_generator = new TokenGenerator("1 + 2.5 : 4? ");
-            Token tmp = token_generator.getNext();
-            while(tmp.getToken() != Tokens.END){
-                System.out.println(tmp.toString());
-                tmp = token_generator.getNext();
-            }
-        }catch(RuntimeException e){
-            System.out.println(e.getMessage());
+        Vector<Token> output = ShuntingYard.getPostfixNotation("1 + (3*3 - 4):2");
+        for(Token i : output){
+            System.out.println(i.toString());
         }
+        //Stack<Token> stack = new Stack<Token>();
+        //stack.push(new Token(Tokens.BEGIN));
+        //stack.push(new Token(Tokens.END));
+        //System.out.println(stack.toString());
     }
 }

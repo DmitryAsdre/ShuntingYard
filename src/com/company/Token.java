@@ -34,24 +34,50 @@ public class Token {
     public double getNum(){
         return num;
     }
-    public String toString(){
-        if(token == Tokens.ERROR)
-            return "ERROR";
-        else if(token == Tokens.L_BRACKET)
-            return "L_BRACKET";
-        else if(token == Tokens.R_BRACKET)
-            return "R_BRACKET";
-        else if(token == Tokens.PLUS)
-            return "PLUS";
-        else if(token == Tokens.MINUS)
-            return "MINUS";
-        else if(token == Tokens.MUL)
-            return "MUL";
-        else if(token == Tokens.DIV)
-            return "DIV";
-        else if(token == Tokens.NUM)
-            return "NUM:" + num;
+
+    public boolean isError(){return token == Tokens.ERROR;}
+    public boolean isBegin(){return token == Tokens.BEGIN;}
+    public boolean isEnd(){return token == Tokens.END;}
+    public boolean isNum(){return token == Tokens.NUM;};
+    public boolean isRBracket(){return token == Tokens.R_BRACKET;}
+    public boolean isLBracket(){return token == Tokens.L_BRACKET;}
+    public boolean isMinus(){return token == Tokens.MINUS;}
+    public boolean isPlus(){return token == Tokens.PLUS;}
+    public boolean isDiv(){return token == Tokens.DIV;}
+    public boolean isMul(){return token == Tokens.MUL;}
+    public boolean isOperator(){return isMul() || isDiv() || isPlus() || isMinus();}
+    public boolean isBracket(){return isLBracket() || isRBracket();}
+
+    public int getPriority(){
+        if(!isOperator())
+            throw new RuntimeException("cannot get priority for non operator");
+        if(isDiv() || isMul())
+            return 1;
         else
+            return 0;
+    }
+    public String toString(){
+        if(isError())
+            return "ERROR";
+        else if(isLBracket())
+            return "L_BRACKET";
+        else if(isRBracket())
+            return "R_BRACKET";
+        else if(isPlus())
+            return "PLUS";
+        else if(isMinus())
+            return "MINUS";
+        else if(isMul())
+            return "MUL";
+        else if(isDiv())
+            return "DIV";
+        else if(isNum())
+            return "NUM:" + num;
+        else if(isBegin())
+            return "BEGIN";
+        else if(isEnd())
             return "END";
+        else
+            throw new RuntimeException("cannot convert unknown token to string");
     }
 }

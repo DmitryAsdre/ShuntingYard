@@ -51,7 +51,7 @@ public class TokenGenerator {
             res.setToken(Tokens.L_BRACKET);
             cur_pos += 1;
         }
-        else if(cur_char == '(') {
+        else if(cur_char == ')') {
             res.setToken(Tokens.R_BRACKET);
             cur_pos += 1;
         }
@@ -65,7 +65,7 @@ public class TokenGenerator {
             cur_pos = end_pos;
         }
         else{
-            throw new RuntimeException("Unexpected symbol in input!");
+            throw new RuntimeException("unexpected symbol in input");
         }
         return res;
     }
